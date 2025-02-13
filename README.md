@@ -1,30 +1,30 @@
-# Image Filter
+# IMAGE_FILTER 
+## NAME  
+image_filter – filters images by extracting and searching for text using OCR  
 
-Image Filter is a C++ command-line tool that scans a directory of images, extracts text using Optical Character Recognition (OCR), and copies images containing a specified text string to a designated output folder.
+## SYNOPSIS  
+`image_filter` **-i** *input_path* **-o** *output_path* **-t** *text* [**-e** *ext*]  
 
-## Features
+## DESCRIPTION  
+`image_filter` scans a directory of images, extracts text using Tesseract OCR, and copies images containing a specified text string to an output folder.  
 
-- **OCR Integration:** Utilizes Tesseract OCR (via OpenCV’s text module) to extract text from images.
-- **Parallel Processing:** Employs OpenMP to process multiple images concurrently for improved performance.
-- **Command-Line Interface:** Uses Boost.Program_options to provide a flexible interface for specifying input/output directories, image file extension, and search text.
-- **Customizable File Extension:** Allows filtering for images with a specific extension (default is `.bmp`).
+## OPTIONS  
+**-i**, **--input_path** *DIR*  
+:   Directory containing image files to process (recursively).  
 
-## Dependencies
+**-o**, **--output_path** *DIR*  
+:   Directory where matching images will be copied.  
 
-To build and run this project, ensure you have the following installed:
+**-t**, **--text** *STRING*  
+:   Text to search for in the extracted OCR result.  
 
-- **C++ Compiler:** Supporting C++17 (or later) for `<filesystem>` and other modern features.
-- **Tesseract OCR:** For text extraction.
-- **Leptonica:** Required by Tesseract for image processing.
-- **OpenCV:** Used for image reading and integration with OCR (specifically, the text module).
-- **Boost.Program_options:** For parsing command-line arguments.
-- **OpenMP:** For parallel processing support.
+**-e**, **--ext** *EXT* (default: `.bmp`)  
+:   File extension of images to process (e.g., `.png`, `.jpg`).  
 
-## Installation
+**-h**, **--help**  
+:   Show usage information.  
 
-1. **Clone the Repository:**
-
-   ```bash
-   git clone https://github.com/Morelli-01/image_filter.git
-   cd image_filter
-
+## EXAMPLES  
+Filter `.png` images containing "example" in `/path/to/images` and copy them to `/path/to/output`:  
+```sh
+image_filter -i /path/to/images -o /path/to/output -t "example" -e ".png"
