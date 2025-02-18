@@ -19,6 +19,7 @@ SRC = main.cpp
 OBJ = $(patsubst %.cpp, $(BUILD_DIR)/%.o, $(SRC))
 TARGET = $(BIN_DIR)/image_filter
 
+DEBUG_ARGS = -i /home/nicola/Desktop/immagini_ecografie/ -o /home/nicola/Desktop/video_ecografie -e .avi -t TESTI
 
 all: $(TARGET)
 
@@ -35,8 +36,13 @@ release: clean
 release: CXXFLAGS=$(RELEASE_CXXFLAGS)
 release: all
 
-# Pulizia
 clean:
 	rm -rf $(BUILD_DIR) $(BIN_DIR)
+
+debug: clean all
+	gdb --args ./$(TARGET) $(ARGS)
+
+run: clean all
+	./$(TARGET) $(DEBUG_ARGS)
 
 .PHONY: all clean release
